@@ -12,6 +12,10 @@ jobs:
         with:
           go-version: '1.14'
       - name: Run coverage
+        env:
+          TEST_SERVER: ${{ secrets.SECRETSERVER }}
+          TEST_ACCOUNT_PHONE: ${{ secrets.SECRETPHONE }}
+          TEST_ACCOUNT_CODE: ${{ secrets.SECRETACCOUNTCODE }}
         run: go test -race -coverprofile=coverage.txt -covermode=atomic
       - name: Upload coverage to Codecov
         run: bash <(curl -s https://codecov.io/bash)
